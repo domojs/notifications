@@ -11,6 +11,7 @@ akala.injectWithName(['$isModule', '$master', '$worker'], function (isModule: ak
             // Called when all modules have been initialized
         });
         master(__filename, './master');
+        require('./webpush')
 
         akala.injectWithNameAsync([AssetRegistration.name], function (va: AssetRegistration)
         {

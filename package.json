@@ -1,6 +1,6 @@
 {
     "name": "@domojs/notifications",
-    "version": "1.0.0",
+    "version": "0.0.1",
     "description": "",
     "main": "dist/server/index.js",
     "scripts": {
@@ -10,7 +10,7 @@
         "build:js:tile": "browserify -x @akala/client -x @akala/core -i @domojs/theme-default/dist/tile dist/client/tile.js -o dist/tile.js",
         "build:js:sw": "browserify -x @akala/client -x @akala/core dist/client/sw.js -o dist/sw.js",
         "prepublishOnly": "npm run build",
-        "build": "npm run build:js && npm run build:js:routes && npm run build:js:tile && npm run build:js:sw"
+        "build": "npm run build:js && npm run build:js:routes && npm run build:js:sw"
     },
     "keywords": [],
     "author": "",
@@ -28,6 +28,7 @@
     "devDependencies": {
         "@akala-modules/core": "^1.1.3",
         "@types/debug": "^0.0.30",
-        "@types/popper.js": "^1.11.0"
+        "@types/popper.js": "^1.11.0",
+        "browserify": "^16.2.2"
     }
 }

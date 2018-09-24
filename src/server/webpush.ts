@@ -2,7 +2,7 @@ import * as akala from '@akala/server';
 import { api } from '../client/api'
 import * as webpush from 'web-push'
 
-akala.injectWithName(['$config'], function (config)
+akala.injectWithName(['$config', '$updateCofnig'], async function (config, updateConfig)
 {
     akala.buildClient(api, { jsonrpcws: true }, {
         async notify(param)
@@ -16,7 +16,17 @@ akala.injectWithName(['$config'], function (config)
             });
         }
     });
-});
+
+    var keys: webpush.VapidKeys = await config.vapid;
+    if (!keys)
+    {
+        keys = webpush.generateVAPIDKeys();
+        await updateConfig('vapid', keys);
+    }
+    else
+        webpush.setVapidDetails('mailto:domojs@dragon-angel.fr', keys.publicKey, keys.privateKey);
+
+})();
 
 akala.api.rest(new akala.Api().clientToServerOneWay<{ user: string, subscription: webpush.PushSubscription, config: { [key: string]: PromiseLike<any> }, updateConfig: Function }>()({
     register: {
@@ -34,7 +44,6 @@ akala.api.rest(new akala.Api().clientToServerOneWay<{ user: string, subscription
     {
         if (param.user)
             throw new Error('user is required');
-
 
         var cfg = await param.config[param.user];
         if (!cfg)
