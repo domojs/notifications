@@ -1,0 +1,33 @@
+{
+    "name": "@domojs/notifications",
+    "version": "1.0.0",
+    "description": "",
+    "main": "dist/server/index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\"",
+        "build:js": "tsc -p src",
+        "build:js:routes": "browserify -x @akala/client -x @akala/core dist/client/routes.js -o dist/routes.js",
+        "build:js:tile": "browserify -x @akala/client -x @akala/core -i @domojs/theme-default/dist/tile dist/client/tile.js -o dist/tile.js",
+        "build:js:sw": "browserify -x @akala/client -x @akala/core dist/client/sw.js -o dist/sw.js",
+        "prepublishOnly": "npm run build",
+        "build": "npm run build:js && npm run build:js:routes && npm run build:js:tile && npm run build:js:sw"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "MIT",
+    "types": "dist/server/index.d.ts",
+    "dependencies": {
+        "@akala/server": "^2.0.43",
+        "@types/web-push": "^3.3.0",
+        "web-push": "^3.3.3"
+    },
+    "peerDependencies": {
+        "@akala-modules/core": "^1.1.3",
+        "@domojs/theme-default": "^1.1.20"
+    },
+    "devDependencies": {
+        "@akala-modules/core": "^1.1.3",
+        "@types/debug": "^0.0.30",
+        "@types/popper.js": "^1.11.0"
+    }
+}
