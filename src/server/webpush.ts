@@ -21,7 +21,7 @@ akala.injectWithName(['$config', '$updateConfig', '$agent.@domojs/notifications'
     if (!keys)
     {
         keys = webpush.generateVAPIDKeys();
-        await updateConfig('vapid', keys);
+        await updateConfig(keys, 'vapid');
     }
     else
         webpush.setVapidDetails('mailto:domojs@dragon-angel.fr', keys.publicKey, keys.privateKey);
