@@ -1,6 +1,6 @@
 {
     "name": "@domojs/notifications",
-    "version": "0.0.4",
+    "version": "0.0.5",
     "description": "",
     "main": "dist/server/index.js",
     "scripts": {
