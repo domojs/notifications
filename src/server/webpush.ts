@@ -31,6 +31,8 @@ akala.injectWithName(['$config', '$updateCofnig'], async function (config, updat
 akala.api.rest(new akala.Api().clientToServerOneWay<{ user: string, subscription: webpush.PushSubscription, config: { [key: string]: PromiseLike<any> }, updateConfig: Function }>()({
     register: {
         rest: {
+            url: '/api/webpush',
+            method: 'post',
             param: {
                 user: 'user',
                 subscription: 'body',
