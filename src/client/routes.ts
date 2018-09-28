@@ -28,7 +28,7 @@ if (Notification.permission !== 'denied')
 
         var notificationClient = akala.api.rest(api).createServerProxy('/api/@domojs/notifications')
 
-        Promise.all([swRegistration, notificationClient.getPublicKey(void)]).then(([reg, publicKey]) =>
+        Promise.all([swRegistration, notificationClient.getPublicKey(null)]).then(([reg, publicKey]) =>
         {
             const applicationServerKey = urlB64ToUint8Array(publicKey);
 
