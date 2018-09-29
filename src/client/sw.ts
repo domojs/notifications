@@ -1,3 +1,4 @@
+
 ///<reference path="../../serviceworker.d.ts" />
 
 module notifications

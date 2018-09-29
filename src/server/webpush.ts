@@ -2,7 +2,7 @@ import * as akala from '@akala/server';
 import { api } from '../client/api'
 import * as webpush from 'web-push'
 
-akala.injectWithName(['$config', '$updateConfig', '$agent.api/notifications'], async function (config, updateConfig, notifications)
+akala.injectWithName(['$config', '$updateConfig', '$agent.api/@domojs/notifications'], async function (config, updateConfig, notifications)
 {
     akala.api.jsonrpcws(api).createClient(await notifications, {
         async notify(param)
