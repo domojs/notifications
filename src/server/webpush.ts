@@ -10,7 +10,7 @@ akala.injectWithName(['$config', '$updateConfig', '$agent.api/@domojs/notificati
             var endPoints: webpush.PushSubscription[] = await config[param.user];
             endPoints.forEach(async endpoint =>
             {
-                var result = await webpush.sendNotification(endpoint, param.notification);
+                var result = await webpush.sendNotification(endpoint, JSON.stringify(param.notification));
                 if (result.statusCode != 200)
                     akala.logger.error(result);
             });
