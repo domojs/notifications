@@ -15,7 +15,7 @@ akala.injectWithName(['$isModule', '$master', '$worker'], function (isModule: ak
 
         akala.injectWithNameAsync([AssetRegistration.name], function (va: AssetRegistration)
         {
-            // va.register('/js/routes.js', require.resolve('../routes'));
+            va.register('/js/routes.js', require.resolve('../routes'));
             va.register('/js/sw.js', require.resolve('../sw'));
 
         });
