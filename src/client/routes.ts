@@ -48,9 +48,3 @@ if (Notification.permission !== 'denied')
         });
     })();
 }
-
-akala.injectWithName(['$agent.@domojs/notifications'], function (agent)
-{
-    // var client = akala.api.jsonrpcws(api).createClient(agent, { notify:});
-
-})
