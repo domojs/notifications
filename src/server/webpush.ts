@@ -4,7 +4,7 @@ import * as webpush from 'web-push'
 
 akala.injectWithName(['$config', '$updateConfig', '$agent.api/notifications'], async function (config, updateConfig, notifications)
 {
-    akala.buildClient(api, { jsonrpcws: notifications }, {
+    akala.buildClient(api, { jsonrpcws: await notifications }, {
         async notify(param)
         {
             var endPoints: webpush.PushSubscription[] = await config[param.user];
@@ -31,7 +31,7 @@ akala.injectWithName(['$config', '$updateConfig', '$agent.api/notifications'], a
 akala.api.rest(new akala.Api().clientToServerOneWay<{ user: string, subscription: webpush.PushSubscription, config: { [key: string]: PromiseLike<any> }, updateConfig: Function }>()({
     register: {
         rest: {
-            url: '/api/webpush',
+            url: '/webpush',
             method: 'post',
             param: {
                 user: 'user',
@@ -41,7 +41,7 @@ akala.api.rest(new akala.Api().clientToServerOneWay<{ user: string, subscription
             }
         }
     }
-})).createServer('/', {
+})).createServer('/api/notifications', {
     async register(param)
     {
         if (param.user)
