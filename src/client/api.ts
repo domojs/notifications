@@ -22,12 +22,14 @@ export var webpushApi = new akala.Api()
             }
         }
     })
-    .clientToServer<{ vapid: { [key: string]: PromiseLike<any> } }, string>()({
+    .clientToServer<{ config: { vapid: { [key: string]: PromiseLike<any> } } }, string>()({
         getPublicKey: {
             rest: {
                 url: '/publicKey',
                 method: 'get',
-                param: '$config'
+                param: {
+                    config: '$config'
+                }
             }
         }
     })

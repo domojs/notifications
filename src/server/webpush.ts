@@ -41,8 +41,8 @@ akala.api.rest(webpushApi).createServer('/api/webpush', {
             cfg.push(param.subscription);
         await param.updateConfig(param.user, cfg);
     },
-    getPublicKey(config)
+    getPublicKey(p)
     {
-        return config.vapid.publicKey;
+        return p.config.vapid.publicKey;
     },
 })
