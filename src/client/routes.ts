@@ -5,7 +5,6 @@ declare var swRegistration: PromiseLike<ServiceWorkerRegistration>;
 
 if (Notification.permission !== 'denied')
 {
-    // const publicKey = 'BDU5tQ-WzGDUJOsE3743I9LeyfolOYQH66vux5boQxFHj-d_rJkaLmFje6h-Iuv9AwnrgfpF4jkLbY3LTYpWjZQ';
     function urlB64ToUint8Array(base64String)
     {
         const padding = '='.repeat((4 - base64String.length % 4) % 4);
@@ -23,7 +22,7 @@ if (Notification.permission !== 'denied')
         return outputArray;
     }
 
-    var notificationClient = akala.api.rest(webpushApi).createServerProxy('/api/@domojs/notifications')
+    var notificationClient = akala.api.rest(webpushApi).createServerProxy('/api/@domojs/notifications/webpush')
 
     Promise.all([swRegistration, notificationClient.getPublicKey(null)]).then(([reg, publicKey]) =>
     {
