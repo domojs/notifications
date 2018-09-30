@@ -8,7 +8,7 @@ export var api = new akala.Api()
     .clientToServerOneWay<{ name: string, user: string, notification: SerializableObject }>()({ notify: true })
 
 export var webpushApi = new akala.Api()
-    .clientToServerOneWay<{ user: string, subscription: webpush.PushSubscription, config: { [key: string]: PromiseLike<any> }, updateConfig: Function }>()({
+    .clientToServerOneWay<{ user: string, subscription: webpush.PushSubscription, config: { vapid: { publicKey: PromiseLike<string> } }, updateConfig: Function }>()({
         register: {
             rest: {
                 url: '/',
@@ -22,7 +22,7 @@ export var webpushApi = new akala.Api()
             }
         }
     })
-    .clientToServer<{ config: { [key: string]: PromiseLike<any> } }, string>()({
+    .clientToServer<{ vapid: { [key: string]: PromiseLike<any> } }, string>()({
         getPublicKey: {
             rest: {
                 url: '/publicKey',
