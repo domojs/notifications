@@ -27,6 +27,7 @@ export var webpushApi = new akala.Api()
             rest: {
                 url: '/publicKey',
                 method: 'get',
+                type: 'text',
                 param: {
                     config: '$config'
                 }
