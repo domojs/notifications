@@ -36,7 +36,7 @@ if (Notification.permission !== 'denied')
             .then(function (subscription)
             {
                 console.log('User is subscribed.');
-                debugger;
+                notificationClient.register({ subscription: subscription.toJSON() });
             })
             .catch(function (err)
             {
