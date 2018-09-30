@@ -3,7 +3,7 @@ import { api } from '../client/api'
 
 var notifiers: { [key: string]: { [key: string]: akala.Connection } } = {};
 
-akala.buildServer(api, { jsonrpcws: '/api/notifications', rest: '/api/notifications' }, {
+akala.buildServer(api, { jsonrpcws: '/api/notifications' }, {
     register(param, connection: akala.Connection)
     {
         if (!notifiers[param.name])
@@ -12,10 +12,6 @@ akala.buildServer(api, { jsonrpcws: '/api/notifications', rest: '/api/notificati
             notifiers[param.name][param.user] = connection;
         else
             notifiers[param.name][''] = connection;
-    },
-    getPublicKey(p)
-    {
-        return p.publicKey;
     },
     notify(p)
     {

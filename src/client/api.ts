@@ -1,15 +1,33 @@
 import * as akala from '@akala/core';
+import * as webpush from 'web-push';
 import { SerializableObject } from '@akala/json-rpc-ws';
 
 export var api = new akala.Api()
     .clientToServerOneWay<{ name: string, user: string }>()({ register: true })
     .serverToClientOneWay<{ user: string, notification: SerializableObject }>()({ notify: true })
     .clientToServerOneWay<{ name: string, user: string, notification: SerializableObject }>()({ notify: true })
-    .clientToServer<void, string>()({
+
+export var webpushApi = new akala.Api()
+    .clientToServerOneWay<{ user: string, subscription: webpush.PushSubscription, config: { [key: string]: PromiseLike<any> }, updateConfig: Function }>()({
+        register: {
+            rest: {
+                url: '/',
+                method: 'post',
+                param: {
+                    user: 'user',
+                    subscription: 'body',
+                    config: '$config',
+                    updateConfig: '$updateConfig'
+                }
+            }
+        }
+    })
+    .clientToServer<{ config: { [key: string]: PromiseLike<any> } }, string>()({
         getPublicKey: {
-            jsonrpcws: true, rest: {
+            rest: {
                 url: '/publicKey',
-                method: 'get'
+                method: 'get',
+                param: '$config'
             }
         }
     })

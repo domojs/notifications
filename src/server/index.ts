@@ -6,7 +6,7 @@ akala.injectWithName(['$isModule', '$master', '$worker'], function (isModule: ak
 {
     if (isModule('@domojs/notifications'))
     {
-        worker.on('ready', function ()
+        worker.on('after-master', function ()
         {
             // Called when all modules have been initialized
             require('./webpush');

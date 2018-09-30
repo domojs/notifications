@@ -1,5 +1,5 @@
 import * as akala from '@akala/server';
-import { api } from '../client/api'
+import { api, webpushApi } from '../client/api'
 import * as webpush from 'web-push'
 
 akala.injectWithName(['$config', '$updateConfig', '$agent.api/@domojs/notifications'], async function (config, updateConfig, notifications)
@@ -28,20 +28,7 @@ akala.injectWithName(['$config', '$updateConfig', '$agent.api/@domojs/notificati
 
 })();
 
-akala.api.rest(new akala.Api().clientToServerOneWay<{ user: string, subscription: webpush.PushSubscription, config: { [key: string]: PromiseLike<any> }, updateConfig: Function }>()({
-    register: {
-        rest: {
-            url: '/webpush',
-            method: 'post',
-            param: {
-                user: 'user',
-                subscription: 'body',
-                config: '$config',
-                updateConfig: '$updateConfig'
-            }
-        }
-    }
-})).createServer('/api/notifications', {
+akala.api.rest(webpushApi).createServer('/api/webpush', {
     async register(param)
     {
         if (param.user)
@@ -53,5 +40,9 @@ akala.api.rest(new akala.Api().clientToServerOneWay<{ user: string, subscription
         else
             cfg.push(param.subscription);
         await param.updateConfig(param.user, cfg);
-    }
+    },
+    getPublicKey(config)
+    {
+        return config.vapid.publicKey;
+    },
 })

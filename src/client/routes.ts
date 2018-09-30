@@ -1,4 +1,4 @@
-import { api } from './api'
+import { api, webpushApi } from './api'
 import * as akala from '@akala/client'
 
 declare var swRegistration: PromiseLike<ServiceWorkerRegistration>;
@@ -23,7 +23,7 @@ if (Notification.permission !== 'denied')
         return outputArray;
     }
 
-    var notificationClient = akala.api.rest(api).createServerProxy('/api/@domojs/notifications')
+    var notificationClient = akala.api.rest(webpushApi).createServerProxy('/api/@domojs/notifications')
 
     Promise.all([swRegistration, notificationClient.getPublicKey(null)]).then(([reg, publicKey]) =>
     {
@@ -37,11 +37,12 @@ if (Notification.permission !== 'denied')
             .then(function (subscription)
             {
                 console.log('User is subscribed.');
-
+                debugger;
             })
             .catch(function (err)
             {
                 console.log('Failed to subscribe the user: ', err);
+                debugger;
             });
     });
 }
