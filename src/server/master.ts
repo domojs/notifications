@@ -3,7 +3,7 @@ import { api } from '../client/api'
 
 var notifiers: { [key: string]: { [key: string]: akala.Connection } } = {};
 
-akala.buildServer(api, { jsonrpcws: '/api' }, {
+akala.buildServer(api, { jsonrpcws: '/api/notifications', rest: '/api/notifications' }, {
     register(param, connection: akala.Connection)
     {
         if (!notifiers[param.name])
