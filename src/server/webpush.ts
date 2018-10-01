@@ -31,7 +31,7 @@ akala.injectWithName(['$config', '$updateConfig', '$agent.api/@domojs/notificati
 akala.api.rest(webpushApi).createServer('/api/webpush', {
     async register(param)
     {
-        if (param.user)
+        if (!param.user)
             throw new Error('user is required');
 
         var cfg = await param.config[param.user];
@@ -39,7 +39,7 @@ akala.api.rest(webpushApi).createServer('/api/webpush', {
             cfg = [param.subscription];
         else
             cfg.push(param.subscription);
-        await param.updateConfig(param.user, cfg);
+        await param.updateConfig(cfg, param.user);
     },
     getPublicKey(p)
     {
