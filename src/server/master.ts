@@ -1,10 +1,11 @@
 import * as akala from '@akala/server'
+import { Connection } from '@akala/json-rpc-ws'
 import { api } from '../client/api'
 
-var notifiers: { [key: string]: { [key: string]: akala.Connection } } = {};
+var notifiers: { [key: string]: { [key: string]: Connection } } = {};
 
-akala.buildServer(api, { jsonrpcws: '/api/notifications' }, {
-    register(param, connection: akala.Connection)
+akala.api.buildServer(api, { jsonrpcws: '/api/notifications' }, {
+    register(param, connection: Connection)
     {
         if (!notifiers[param.name])
             notifiers[param.name] = {};
