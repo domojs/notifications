@@ -17,7 +17,7 @@
     "license": "MIT",
     "types": "dist/server/index.d.ts",
     "dependencies": {
-        "@akala/server": "^2.1.11",
+        "@akala/server": "^4.0.34",
         "web-push": "^3.3.3"
     },
     "peerDependencies": {
